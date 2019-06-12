@@ -12,5 +12,5 @@ NoteList.prototype.returnNotes = function() {
 
 NoteList.prototype.createNote = function(text) {
   var note = new Note(text);
-  this.notes.push(note);
+  this.notes.push(note.text);
 };

@@ -8,64 +8,54 @@ testNewNoteIsCreated();
 
 function testNoteCanBeStored() {
   var note = new Note("My favorite language is JavaScript")
-  assert.isTrue(note._notes.length === 1);
+  assert.isTrue(note.text === "My favorite language is JavaScript");
 };
 
 testNoteCanBeStored();
 
 function testNoteCanReturnText() {
-  var newNote = new Note("My favorite language is JavaScript")
-  assert.isTrue(newNote.returnText()[0] === "My favorite language is JavaScript");
+  var note = new Note("My favorite language is JavaScript")
+  var notelist = new NoteList();
+  notelist.storeNote(note.text);
+  assert.isTrue(notelist.returnNotes()[0] === "My favorite language is JavaScript");
 };
 
 testNoteCanReturnText();
 
-describe('notelist', function() {
+function testNoteListAddsModels(){
   var notelist = new NoteList();
+  var note = new Note('manatee');
+  notelist.storeNote(note);
+  assert.isTrue(notelist.notes.length === 1);
+};
 
-  it('adds multiple note models to an array', function() {
-    var note = new Note('manatee');
-    notelist.storeNote(note);
+testNoteListAddsModels();
 
-    expect(notelist.notes.length === 1);
-  });
+function testCreateAndStoreNoteModel() {
+  var notelist = new NoteList();
+  notelist.createNote('stingrays');
+  assert.isTrue(notelist.notes.length === 1);
+  assert.isTrue(notelist.returnNotes()[0] === 'stingrays');
+};
 
-  describe('#returnNotes', function() {
-    it('returns all notes', function() {
-      var note = new Note('manatee');
-      notelist.storeNote(note);
+testCreateAndStoreNoteModel();
 
-      expect(notelist.returnNotes() === 'manatee');
-    });
-  });
 
-  describe('#createNote', function() {
-    it('creates and stores a new single note model', function() {
-      notelist.createNote('stingrays');
-      expect(notelist.notes.length === 1);
-    });
-  });
-
-});
-
-describe('notelistview',function() {
+function testNoteListViewTakesModel() {
   var notelist = new NoteList();
   notelist.createNote('jellyfish');
   var notelistview = new NoteListView(notelist);
+  assert.isTrue(notelistview.notelist.notes.length === 1);
+};
 
-  it('takes a note model upon instantiation',function() {
-    expect(notelistview === notelist);
-  });
+testNoteListViewTakesModel();
 
-  describe('#returnHTML',function() {
-    var notelist = new NoteList();
-    notelist.createNote('jellyfish');
-    notelist.createNote('stingray');
-    var notelistview = new NoteListView(notelist);
+function testReturnHTML() {
+  var notelist = new NoteList();
+  notelist.createNote('jellyfish');
+  notelist.createNote('octopus');
+  var notelistview = new NoteListView(notelist);
+  assert.isTrue(notelistview.returnHTML() === '<ul><li><div>jellyfish</div></li><li><div>octopus</div></li></ul>');
+};
 
-    it('returns a string of HTML that represents the notelist model',function() {
-      expect(notelistview.returnHtml() === '<ul><li><div>jellyfish</div></li><li><div>stingray</div></li></ul>');
-    });
-  });
-
-});
+testReturnHTML();

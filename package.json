@@ -1,0 +1,22 @@
+{
+  "name": "noteappjs",
+  "version": "1.0.0",
+  "description": "Single page note app in JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fetc90/noteAppJS.git"
+  },
+  "keywords": [
+    "JavaScript"
+  ],
+  "author": "Francesca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fetc90/noteAppJS/issues"
+  },
+  "homepage": "https://github.com/fetc90/noteAppJS#readme"
+}
